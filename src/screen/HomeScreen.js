@@ -5,37 +5,7 @@ import { getFavorites } from "../utils/asyncStorage";
 import { useIsFocused } from "@react-navigation/native";
 
 const HomeScreen = () => {
-  const isFocused = useIsFocused();
-  const [jewelry, setJewelry] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const api = new ProductAPI();
-      const data = await api.getAllJewelry();
-      data.sort((a, b) => b.percentOff - a.percentOff);
-      setJewelry(data);
-      setFiltered(data);
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (isFocused) {
-      const loadFavorites = async () => {
-        const stored = await getFavorites();
-        setFavorites(stored);
-      };
-      loadFavorites();
-    }
-  }, [isFocused]);
-
-  useEffect(() => {
-    let list = jewelry;
-    if (selectedBrand) {
-      list = list.filter((item) => item.brand === selectedBrand);
-    }
-    setFiltered(list);
-  }, [selectedBrand, jewelry]);
   return (
     <SafeAreaView style={styles.container}>
       {/* <FlatList
