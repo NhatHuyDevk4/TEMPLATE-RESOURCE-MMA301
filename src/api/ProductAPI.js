@@ -1,12 +1,12 @@
 import ApiClient from "./APIClient";
 
-export class ProductAPI extends ApiClient {
+export const ProductAPI = {
   // Lấy toàn bộ danh sách sản phẩm
   async getAllProducts() {
-    const res = await this.axiosInstance.get("/nameEndPoint");
+    const res = await this.axiosInstance.get("/");
     if (res.status === 200) return res.data;
     throw new Error("Failed to fetch product list");
-  }
+  },
 
   // Lấy chi tiết một sản phẩm theo ID
   async getProductById(productId) {
@@ -20,14 +20,14 @@ export class ProductAPI extends ApiClient {
     const res = await this.axiosInstance.post("/nameEndPoint", data);
     if (res.status === 201) return res.data;
     throw new Error("Failed to create product");
-  }
+  },
 
   // Cập nhật thông tin sản phẩm
   async updateProduct(productId, data) {
     const res = await this.axiosInstance.put(`/nameEndPoint/${productId}`, data);
     if (res.status === 200) return res.data;
     throw new Error("Failed to update product");
-  }
+  },
 
   // Xóa sản phẩm
   async deleteProduct(productId) {
