@@ -1,15 +1,14 @@
 import axios from "axios";
 
-export default class ApiClient {
-  constructor() {
-    const BASEURL = process.env.EXPO_PUBLIC_BASEURL;
-    this.axiosInstance = axios.create({
-      baseURL: BASEURL,
+const axiosInstance = axios.create({
+  baseURL: process.env.EXPO_PUBLIC_BASEURL,
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-      timeout: 10000,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-}
+
+export default {
+  axiosInstance,
+};
